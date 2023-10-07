@@ -1,0 +1,16 @@
+/* cs -> custom styles*/
+.cs-category-button {
+    width: 6rem;
+    text-align: center;
+    /* background-color: yellow; */
+    padding-block: 0.3em;
+    border-bottom: 1px solid transparent;
+}
+
+.cs-category-button:hover {
+    border-bottom: 1px solid var(--signature-color);
+}
+
+.active {
+    border-bottom: 1px solid var(--signature-color);
+}
