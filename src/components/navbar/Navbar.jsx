@@ -43,7 +43,7 @@ const Navbar = () => {
                     </NavLink>
                 </div>
             </div>
-            <div id="categories-wrapper" className="flex justify-center">
+            <div id="categories-wrapper" className="flex justify-center h-10">
                 <div id="categories" className="flex gap-2">
                     <NavLink to="/products/1" className="cs-category-button">
                         Men

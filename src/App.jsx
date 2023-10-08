@@ -18,7 +18,7 @@ import AuthContextProvider from "./context/AuthContextProvider";
 //main layout
 const Layout = () => {
     return (
-        <div>
+        <div className="flex flex-col h-full">
             <Navbar />
             <Outlet />
             <Footer />

@@ -27,23 +27,19 @@ const Slider = () => {
                 className="flex w-[300vw] transition-all"
                 style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
             >
-                <img src={sliderImages[0]} alt="" className="w-full" />
-                <img src={sliderImages[1]} alt="" className="w-full" />
-                <img
-                    src={sliderImages[2]}
-                    alt=""
-                    className="w-full object-cover"
-                />
+                <img src={sliderImages[0]} alt="" className="w-screen" />
+                <img src={sliderImages[1]} alt="" className="w-screen" />
+                <img src={sliderImages[2]} alt="" className="w-screen" />
             </div>
-            <div className="absolute bottom-10 left-1/2 flex gap-4">
+            <div className="absolute flex gap-4 inset-0 justify-center items-end bottom-7">
                 <button
-                    className="bg-cyan-500 text-white w-10 h-10"
+                    className="w-10 h-10 cs-button-color cs-button-color-hover"
                     onClick={() => handleSliderAction("left")}
                 >
                     <ChevronLeftOutlinedIcon />
                 </button>
                 <button
-                    className="bg-cyan-500 text-white w-10 h-10"
+                    className="white w-10 h-10 cs-button-color cs-button-color-hover"
                     onClick={() => handleSliderAction("right")}
                 >
                     <ChevronRightOutlinedIcon />

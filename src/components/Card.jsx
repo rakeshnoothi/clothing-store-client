@@ -2,12 +2,15 @@ import { Link } from "react-router-dom";
 
 const Card = ({ cardData }) => {
     return (
-        <Link to="/product/1" className="flex flex-col gap-2 p-2 w-[300px]">
-            <div className="w-full h-[378px] relative">
+        <Link
+            to="/product/1"
+            className="max-w-[300px] min-w-[182px] flex flex-col gap-2 p-2 border border-gray-300 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] hover:scale-105 transition-all"
+        >
+            <div>
                 <img
                     src="https://assets.ajio.com/medias/sys_master/root/20230825/YfhT/64e7caebddf779151972a68f/wrangler_blue_lightly_washed_skinny_fit_jeans.jpg"
                     alt=""
-                    className="w-full h-full object-cover"
+                    className="w-full h-full"
                 />
             </div>
             <div id="product-info" className="flex flex-col gap-2">

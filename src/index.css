@@ -5,3 +5,22 @@
 :root {
     --signature-color: rgb(34, 211, 238);
 }
+
+html,
+body {
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+.cs-button-color {
+    background-color: white;
+    color: var(--signature-color);
+}
+
+.cs-button-color-hover:hover {
+    background-color: var(--signature-color);
+    color: white;
+}
