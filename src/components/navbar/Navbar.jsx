@@ -45,16 +45,25 @@ const Navbar = () => {
             </div>
             <div id="categories-wrapper" className="flex justify-center h-10">
                 <div id="categories" className="flex gap-2">
-                    <NavLink to="/products/1" className="cs-category-button">
+                    <NavLink to="/products/men" className="cs-category-button">
                         Men
                     </NavLink>
-                    <NavLink to="/products/2" className="cs-category-button">
+                    <NavLink
+                        to="/products/women"
+                        className="cs-category-button"
+                    >
                         Women
                     </NavLink>
-                    <NavLink to="/products/3" className="cs-category-button">
+                    <NavLink
+                        to="/products/children"
+                        className="cs-category-button"
+                    >
                         Children
                     </NavLink>
-                    <NavLink to="/products/4" className="cs-category-button">
+                    <NavLink
+                        to="/products/accessories"
+                        className="cs-category-button"
+                    >
                         Accessories
                     </NavLink>
                 </div>

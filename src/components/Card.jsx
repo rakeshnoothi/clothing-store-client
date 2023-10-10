@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 
 const Card = ({ cardData }) => {
+    // temporary variable.
     return (
         <Link
-            to="/product/1"
+            to={`/product/${cardData.category}`}
             className="max-w-[300px] min-w-[182px] flex flex-col gap-2 p-2 border border-gray-300 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] hover:scale-105 transition-all"
         >
             <div>

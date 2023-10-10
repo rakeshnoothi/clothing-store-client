@@ -6,10 +6,11 @@ const FeaturedProducts = ({ type }) => {
             <span className="text-xl font-semibold uppercase">{type}</span>
             <div id="card-wrapper" className="flex gap-4 justify-center ">
                 {/* maximum cards should be four */}
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {/* temporary cardata field value */}
+                <Card cardData={{ category: "men" }} />
+                <Card cardData={{ category: "men" }} />
+                <Card cardData={{ category: "men" }} />
+                <Card cardData={{ category: "men" }} />
             </div>
         </div>
     );
