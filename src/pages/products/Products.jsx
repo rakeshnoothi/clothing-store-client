@@ -1,33 +1,42 @@
 import Filter from "./components/Filter";
 import List from "./components/List";
 
+// fetch products based on the category.
+const products = [
+    {
+        id: 1,
+        category: "men",
+        type: "shirt",
+        name: "Fashionable Shirt collars",
+        price: "100",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quidem corrupti ab unde qui eveniet tempore aliquam beatae fugit. Recusandae placeat nobis qui sed voluptas architecto alias pariatur, consectetur dolores.",
+        images: [
+            "https://assets.ajio.com/medias/sys_master/root/20230816/GS3w/64dccf30eebac147fccd0ba9/wrangler_black_washed_jeans_with_5-pocket_styling.jpg",
+            "https://assets.ajio.com/medias/sys_master/root/20230816/2Ufb/64dca39beebac147fccc699a/lee_green_men_checked_slim_fit_shirt_with_patch_pocket.jpg",
+        ],
+    },
+    {
+        id: 2,
+        category: "women",
+        type: "pant",
+        name: "Toneed Jeans",
+        price: "300",
+        description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quidem corrupti ab unde qui eveniet tempore aliquam beatae fugit. Recusandae placeat nobis qui sed voluptas architecto alias pariatur, consectetur dolores.",
+        images: [
+            "https://assets.ajio.com/medias/sys_master/root/20230816/GS3w/64dccf30eebac147fccd0ba9/wrangler_black_washed_jeans_with_5-pocket_styling.jpg",
+            "https://assets.ajio.com/medias/sys_master/root/20230816/2Ufb/64dca39beebac147fccc699a/lee_green_men_checked_slim_fit_shirt_with_patch_pocket.jpg",
+        ],
+    },
+];
+
 const Products = () => {
     return (
         <div className="grow flex">
             <Filter />
-            <List />
+            <List products={products} />
         </div>
     );
 };
 export default Products;
-
-// filters.
-// what a product has.
-// price, type, brand.
-// filter by price.
-// sort by price radio buttons.
-// checkbox for multiple type products and brand.
-
-/*
-prob.
-printing type of product efficiently.
-
-every product has type.
-i need to show every product type at filters.
-store every product type seperatly.
-    consider requested product type and filter category for that type.
-    if 1000 of products -> iterate through every product for that specific types.
-
-hard code types.
-
-*/

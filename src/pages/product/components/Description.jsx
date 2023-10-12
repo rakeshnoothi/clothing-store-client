@@ -2,9 +2,18 @@ import { useState } from "react";
 // material icon imports.
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+// custom hook imports.
+import useCart from "../../../hooks/useCart";
+import useProduct from "../../../hooks/useProduct";
 
 const Description = () => {
     const [quantity, setQuantity] = useState(0);
+    const { product } = useProduct();
+    const { cartItems, setCartItems } = useCart();
+
+    const addToCart = () => {};
+
+    console.log("came from prodcut description");
 
     const handleQuantity = type => {
         if (type === "increase" && quantity >= 0) {
@@ -20,18 +29,11 @@ const Description = () => {
             id="about_description_wrapper"
             className="w-full flex flex-col gap-4"
         >
-            <span className="uppercase text-xl font-bold">
-                Name of the product
-            </span>
+            <span className="uppercase text-xl font-bold">{product.name}</span>
             <span className="font-semibold text-lg">
-                <span>&#8377;</span> 20
+                <span>&#8377;</span> {product.price}
             </span>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laudantium, excepturi! Dignissimos porro nulla ratione ea
-                tempore sequi minima tempora autem laborum ducimus? Laboriosam
-                porro, voluptas ut dicta ad eos nemo.
-            </p>
+            <p>{product.description}</p>
             <div className="flex gap-2 items-center">
                 <button
                     className="w-10 h-10 text-xl font-bold cs-button-color cs-button-color-hover"
@@ -47,7 +49,10 @@ const Description = () => {
                     +
                 </button>
             </div>
-            <button className="p-2 w-max flex items-center gap-2 cs-button-color cs-button-color-hover">
+            <button
+                className="p-2 w-max flex items-center gap-2 cs-button-color cs-button-color-hover"
+                onClick={() => addToCart()}
+            >
                 <ShoppingCartOutlinedIcon />
                 Add To Cart
             </button>

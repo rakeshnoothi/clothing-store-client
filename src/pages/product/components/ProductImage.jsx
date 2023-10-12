@@ -1,37 +1,37 @@
 import { useState } from "react";
+import useProduct from "../../../hooks/useProduct";
 
-const productImages = [
-    "https://assets.ajio.com/medias/sys_master/root/20230816/GS3w/64dccf30eebac147fccd0ba9/wrangler_black_washed_jeans_with_5-pocket_styling.jpg",
-    "https://assets.ajio.com/medias/sys_master/root/20230816/2Ufb/64dca39beebac147fccc699a/lee_green_men_checked_slim_fit_shirt_with_patch_pocket.jpg",
-];
-
-const SideImage = ({ productImage, setMainImage }) => {
+const SideImage = ({ productImage, mainImage, setMainImage }) => {
     return (
         <div
-            className="hover:cursor-pointer"
+            className="bg-black hover:cursor-pointer"
             onClick={() => setMainImage(productImage)}
         >
             <img
                 src={productImage}
                 alt=""
-                className="w-full h-full object-cover"
+                className={`w-full h-full object-cover ${
+                    productImage === mainImage ? "opacity-100" : "opacity-50"
+                }`}
             />
         </div>
     );
 };
 
 const ProductImage = () => {
-    const [mainImage, setMainImage] = useState(productImages[0]);
+    const { product } = useProduct();
+    const [mainImage, setMainImage] = useState(product.images[0]);
 
     return (
         <>
             <div id="side_images_wrapper" className="w-[10%] space-y-2">
-                {productImages.map(productImage => {
+                {product.images.map(productImage => {
                     return (
                         <SideImage
                             productImage={productImage}
                             key={productImage}
                             setMainImage={setMainImage}
+                            mainImage={mainImage}
                         />
                     );
                 })}

@@ -11,7 +11,7 @@ const Grid = () => {
                         className="w-full h-full object-cover"
                     />
                     <Link
-                        to="/products/2"
+                        to="/products/women"
                         className="absolute inset-0 w-min h-min p-2 m-auto font-bold cs-button-color cs-button-color-hover"
                     >
                         Women
@@ -25,7 +25,7 @@ const Grid = () => {
                             className="w-full h-full object-cover"
                         />
                         <Link
-                            to="/products/2"
+                            to="/products/men"
                             className="absolute inset-0 w-min h-min p-2 m-auto font-bold cs-button-color cs-button-color-hover"
                         >
                             Men
@@ -38,7 +38,7 @@ const Grid = () => {
                             className="w-full h-full object-cover"
                         />
                         <Link
-                            to="/products/2"
+                            to="/products/children"
                             className="absolute inset-0 w-min h-min p-2 m-auto font-bold cs-button-color cs-button-color-hover"
                         >
                             Children
@@ -53,7 +53,7 @@ const Grid = () => {
                     className="w-full h-full object-cover"
                 />
                 <Link
-                    to="/products/2"
+                    to="/products/accessories"
                     className="absolute inset-0 w-min h-min p-2 m-auto font-bold cs-button-color cs-button-color-hover"
                 >
                     Accessories

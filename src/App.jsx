@@ -13,7 +13,11 @@ import PrivateRoute from "./pages/PrivateRoute";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Profile from "./pages/profile/Profile";
+
+//context provider imports.
 import AuthContextProvider from "./context/AuthContextProvider";
+import CartContextProvider from "./context/CartContextProvider";
+import ProductsContextProvider from "./context/ProductContextProvider";
 
 //main layout
 const Layout = () => {
@@ -64,9 +68,13 @@ const router = createBrowserRouter([
 const App = () => {
     return (
         <AuthContextProvider>
-            <RouterProvider router={router}>
-                <Layout />
-            </RouterProvider>
+            <ProductsContextProvider>
+                <CartContextProvider>
+                    <RouterProvider router={router}>
+                        <Layout />
+                    </RouterProvider>
+                </CartContextProvider>
+            </ProductsContextProvider>
         </AuthContextProvider>
     );
 };
