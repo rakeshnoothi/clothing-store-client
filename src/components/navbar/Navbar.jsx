@@ -1,3 +1,4 @@
+import { useState } from "react";
 // router dom imports
 import { Link, NavLink } from "react-router-dom";
 //  css import
@@ -7,9 +8,16 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+//component import.
+import Cart from "../../pages/cart/Cart";
+import useCart from "../../hooks/useCart";
+
 // import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 const Navbar = () => {
+    const [open, setopen] = useState(false);
+    const { cartItems } = useCart();
+
     return (
         <nav className="bg-white top-0 sticky z-50">
             <div
@@ -26,21 +34,24 @@ const Navbar = () => {
                     id="icons"
                     className="h-full flex items-center gap-4 lg:gap-6"
                 >
-                    <NavLink to="/search">
+                    <NavLink to="/search" className="hover:text-cyan-500">
                         <SearchOutlinedIcon />
                     </NavLink>
-                    <NavLink to="/wishlist">
+                    <NavLink to="/wishlist" className="hover:text-cyan-500">
                         <FavoriteBorderOutlinedIcon />
                     </NavLink>
-                    <NavLink to="/profile">
+                    <NavLink to="/profile" className="hover:text-cyan-500">
                         <Person2OutlinedIcon />
                     </NavLink>
-                    <NavLink to="/cart" className="relative ">
+                    <div
+                        className="relative hover:text-cyan-500 hover:cursor-pointer"
+                        onClick={() => setopen(!open)}
+                    >
                         <span className="absolute bg-cyan-400 w-5 h-5 rounded-full text-white text-center -top-3 left-5 flex justify-center items-center">
-                            0
+                            {cartItems.length}
                         </span>
                         <ShoppingCartOutlinedIcon />
-                    </NavLink>
+                    </div>
                 </div>
             </div>
             <div id="categories-wrapper" className="flex justify-center h-10">
@@ -68,6 +79,7 @@ const Navbar = () => {
                     </NavLink>
                 </div>
             </div>
+            {open && <Cart />}
         </nav>
     );
 };

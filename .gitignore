@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # resource files.
-.txt
+plan.txt

@@ -29,6 +29,7 @@ const products = [
             "https://assets.ajio.com/medias/sys_master/root/20230816/GS3w/64dccf30eebac147fccd0ba9/wrangler_black_washed_jeans_with_5-pocket_styling.jpg",
             "https://assets.ajio.com/medias/sys_master/root/20230816/2Ufb/64dca39beebac147fccc699a/lee_green_men_checked_slim_fit_shirt_with_patch_pocket.jpg",
         ],
+        quantity: 0,
     },
 ];
 

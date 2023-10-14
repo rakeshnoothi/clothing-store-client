@@ -11,7 +11,9 @@ const Description = () => {
     const { product } = useProduct();
     const { cartItems, setCartItems } = useCart();
 
-    const addToCart = () => {};
+    const addToCart = product => {
+        setCartItems([...cartItems, product]);
+    };
 
     console.log("came from prodcut description");
 
@@ -36,28 +38,28 @@ const Description = () => {
             <p>{product.description}</p>
             <div className="flex gap-2 items-center">
                 <button
-                    className="w-10 h-10 text-xl font-bold cs-button-color cs-button-color-hover"
+                    className="w-10 h-10 text-xl font-bold cs-button-color-standard"
                     onClick={() => handleQuantity("decrease")}
                 >
                     -
                 </button>
                 <span className="text-lg font-semibold">{quantity}</span>
                 <button
-                    className="w-10 h-10 text-xl font-bold cs-button-color cs-button-color-hover"
+                    className="w-10 h-10 text-xl font-bold cs-button-color-standard"
                     onClick={() => handleQuantity("increase")}
                 >
                     +
                 </button>
             </div>
-            <button
-                className="p-2 w-max flex items-center gap-2 cs-button-color cs-button-color-hover"
-                onClick={() => addToCart()}
-            >
-                <ShoppingCartOutlinedIcon />
-                Add To Cart
-            </button>
-            <div id="add-to-Wishlist-btn">
-                <button className="p-2 w-max flex items-center gap-2 cs-button-color cs-button-color-hover">
+            <div className="flex gap-4">
+                <button
+                    className="p-2 flex items-center gap-2 cs-button-color-standard"
+                    onClick={() => addToCart(product)}
+                >
+                    <ShoppingCartOutlinedIcon />
+                    Add To Cart
+                </button>
+                <button className="p-2 flex items-center gap-2 cs-button-color-standard">
                     <FavoriteBorderOutlinedIcon />
                     Add To Wishlist
                 </button>
