@@ -8,7 +8,7 @@ const SideImage = ({ productImage, mainImage, setMainImage }) => {
             onClick={() => setMainImage(productImage)}
         >
             <img
-                src={productImage}
+                src={`${import.meta.env.VITE_IMAGE_BASE_URL}${productImage}`}
                 alt=""
                 className={`w-full h-full object-cover ${
                     productImage === mainImage ? "opacity-100" : "opacity-50"
@@ -20,12 +20,19 @@ const SideImage = ({ productImage, mainImage, setMainImage }) => {
 
 const ProductImage = () => {
     const { product } = useProduct();
-    const [mainImage, setMainImage] = useState(product.images[0]);
+    const [mainImage, setMainImage] = useState(
+        product.attributes.image1.data.attributes.url
+    );
+
+    const arr = [
+        product.attributes.image1.data.attributes.url,
+        product.attributes.image2.data.attributes.url,
+    ];
 
     return (
         <>
             <div id="side_images_wrapper" className="w-[10%] space-y-2">
-                {product.images.map(productImage => {
+                {arr.map(productImage => {
                     return (
                         <SideImage
                             productImage={productImage}
@@ -36,9 +43,12 @@ const ProductImage = () => {
                     );
                 })}
             </div>
-            <div id="main_image" className="w-1/2 bg-red-400 max-w-[460px]">
+            <div
+                id="main_image"
+                className="w-1/2 bg-red-400 max-w-[460px] max-h-[550px]"
+            >
                 <img
-                    src={mainImage}
+                    src={`${import.meta.env.VITE_IMAGE_BASE_URL}${mainImage}`}
                     alt=""
                     className="w-full h-full object-cover"
                 />

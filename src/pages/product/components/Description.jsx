@@ -5,37 +5,43 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 // custom hook imports.
 import useCart from "../../../hooks/useCart";
 import useProduct from "../../../hooks/useProduct";
+import useAuth from "../../../hooks/useAuth";
 
 const Description = () => {
+    const { user } = useAuth();
     const [quantity, setQuantity] = useState(0);
     const { product } = useProduct();
     const { cartItems, setCartItems } = useCart();
 
     const addToCart = product => {
-        setCartItems([...cartItems, product]);
+        if (user) {
+            setCartItems([...cartItems, product]);
+            alert("Item added to the cart");
+        } else {
+            alert("Please login to add to cart!");
+        }
     };
 
-    console.log("came from prodcut description");
-
     const handleQuantity = type => {
-        if (type === "increase" && quantity >= 0) {
+        if (type === "increase" && quantity >= 0 && quantity < 5) {
             return setQuantity(quantity + 1);
         }
-        if (quantity !== 0) {
+        if (type === "decrease" && quantity > 0) {
             return setQuantity(quantity - 1);
         }
     };
-
     return (
         <div
             id="about_description_wrapper"
             className="w-full flex flex-col gap-4"
         >
-            <span className="uppercase text-xl font-bold">{product.name}</span>
-            <span className="font-semibold text-lg">
-                <span>&#8377;</span> {product.price}
+            <span className="uppercase text-xl font-bold">
+                {product.attributes.name}
             </span>
-            <p>{product.description}</p>
+            <span className="font-semibold text-lg">
+                <span>&#8377;</span> {product.attributes.price}
+            </span>
+            <p>{product.attributes.desc}</p>
             <div className="flex gap-2 items-center">
                 <button
                     className="w-10 h-10 text-xl font-bold cs-button-color-standard"
@@ -43,7 +49,9 @@ const Description = () => {
                 >
                     -
                 </button>
-                <span className="text-lg font-semibold">{quantity}</span>
+                <span className="text-lg font-semibold w-10 h-10 flex justify-center items-center">
+                    {quantity}
+                </span>
                 <button
                     className="w-10 h-10 text-xl font-bold cs-button-color-standard"
                     onClick={() => handleQuantity("increase")}

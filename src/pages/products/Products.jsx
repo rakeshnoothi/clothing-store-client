@@ -1,41 +1,25 @@
 import Filter from "./components/Filter";
 import List from "./components/List";
-
-// fetch products based on the category.
-const products = [
-    {
-        id: 1,
-        category: "men",
-        type: "shirt",
-        name: "Fashionable Shirt collars",
-        price: "100",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quidem corrupti ab unde qui eveniet tempore aliquam beatae fugit. Recusandae placeat nobis qui sed voluptas architecto alias pariatur, consectetur dolores.",
-        images: [
-            "https://assets.ajio.com/medias/sys_master/root/20230816/GS3w/64dccf30eebac147fccd0ba9/wrangler_black_washed_jeans_with_5-pocket_styling.jpg",
-            "https://assets.ajio.com/medias/sys_master/root/20230816/2Ufb/64dca39beebac147fccc699a/lee_green_men_checked_slim_fit_shirt_with_patch_pocket.jpg",
-        ],
-    },
-    {
-        id: 2,
-        category: "women",
-        type: "pant",
-        name: "Toneed Jeans",
-        price: "300",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quidem corrupti ab unde qui eveniet tempore aliquam beatae fugit. Recusandae placeat nobis qui sed voluptas architecto alias pariatur, consectetur dolores.",
-        images: [
-            "https://assets.ajio.com/medias/sys_master/root/20230816/GS3w/64dccf30eebac147fccd0ba9/wrangler_black_washed_jeans_with_5-pocket_styling.jpg",
-            "https://assets.ajio.com/medias/sys_master/root/20230816/2Ufb/64dca39beebac147fccc699a/lee_green_men_checked_slim_fit_shirt_with_patch_pocket.jpg",
-        ],
-    },
-];
+import useFetch from "../../hooks/useFetch";
+import { useParams } from "react-router-dom";
 
 const Products = () => {
+    let { id } = useParams();
+    const { data, isLoading, error } = useFetch(
+        `/categories?filters[name][$eq]=${id}&populate[products][populate][image1]=image1&populate[products][populate][image2]=image2`
+    );
     return (
         <div className="grow flex">
             <Filter />
-            <List products={products} />
+            {isLoading ? (
+                <div>Loading...</div>
+            ) : (
+                data && (
+                    <List
+                        products={data.data.data[0].attributes.products.data}
+                    />
+                )
+            )}
         </div>
     );
 };

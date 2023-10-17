@@ -10,6 +10,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 //component import.
 import Cart from "../../pages/cart/Cart";
+//custom hook imports.
 import useCart from "../../hooks/useCart";
 
 // import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
@@ -48,7 +49,7 @@ const Navbar = () => {
                         onClick={() => setopen(!open)}
                     >
                         <span className="absolute bg-cyan-400 w-5 h-5 rounded-full text-white text-center -top-3 left-5 flex justify-center items-center">
-                            {cartItems.length}
+                            {cartItems.length === 0 ? "0" : cartItems.length}
                         </span>
                         <ShoppingCartOutlinedIcon />
                     </div>

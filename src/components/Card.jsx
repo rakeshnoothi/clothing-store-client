@@ -14,16 +14,18 @@ const Card = ({ product }) => {
                 navigate(`/product/${product.id}`);
             }}
         >
-            <div>
+            <div className="h-full">
                 <img
-                    src={product.images[0]}
+                    src={`${import.meta.env.VITE_IMAGE_BASE_URL}${
+                        product.attributes.image1.data.attributes.url
+                    }`}
                     alt="product image"
-                    className="w-full h-full"
+                    className="w-full h-full object-cover"
                 />
             </div>
             <div id="product-info" className="flex flex-col gap-2">
-                <span className="font-semibold">{product.name}</span>
-                <span>{product.price}</span>
+                <span className="font-semibold">{product.attributes.name}</span>
+                <span>{product.attributes.price}</span>
             </div>
         </Link>
     );

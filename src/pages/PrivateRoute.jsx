@@ -8,7 +8,7 @@ const PrivateRoute = ({ element }) => {
     if (user) {
         return element;
     } else {
-        return <Navigate to="/login" />;
+        return <Navigate to="/login" replace={true} />;
     }
 };
 export default PrivateRoute;

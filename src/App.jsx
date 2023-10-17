@@ -6,7 +6,6 @@ import Home from "./pages/home/Home";
 import Products from "./pages/products/products";
 import Product from "./pages/product/Product";
 import Login from "./pages/login/Login";
-import Cart from "./pages/cart/Cart";
 import PrivateRoute from "./pages/PrivateRoute";
 
 //component imports.
@@ -51,11 +50,6 @@ const router = createBrowserRouter([
             {
                 path: "/login",
                 element: <Login />,
-            },
-            {
-                // access only for authorized users.
-                path: "/cart",
-                element: <PrivateRoute element={<Cart />} />,
             },
             {
                 path: "/profile",
