@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // router dom imports
 import { Link, NavLink } from "react-router-dom";
 //  css import
@@ -12,12 +12,29 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Cart from "../../pages/cart/Cart";
 //custom hook imports.
 import useCart from "../../hooks/useCart";
-
-// import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import axiosInstance from "../../axiosInstance";
 
 const Navbar = () => {
     const [open, setopen] = useState(false);
-    const { cartItems } = useCart();
+    const { cartItems, setCartItems } = useCart();
+    // const {data, isLoading, error} = useFetch("/carts?populate[products][populate][image1]=image1")
+
+    useEffect(() => {
+        const fetchCartItems = async () => {
+            try {
+                const response = await axiosInstance.get(
+                    "/carts?populate[products][populate][image1]=image1"
+                );
+                console.log("from navbar", response);
+                if (response.data.data) {
+                    setCartItems(response.data.data);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchCartItems();
+    }, []);
 
     return (
         <nav className="bg-white top-0 sticky z-50">

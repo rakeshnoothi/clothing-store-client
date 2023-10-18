@@ -31,7 +31,7 @@ const ProductImage = () => {
 
     return (
         <>
-            <div id="side_images_wrapper" className="w-[10%] space-y-2">
+            <div id="side-images-wrapper" className="w-[10%] space-y-2">
                 {arr.map(productImage => {
                     return (
                         <SideImage
@@ -44,7 +44,7 @@ const ProductImage = () => {
                 })}
             </div>
             <div
-                id="main_image"
+                id="main-image"
                 className="w-1/2 bg-red-400 max-w-[460px] max-h-[550px]"
             >
                 <img

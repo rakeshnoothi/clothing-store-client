@@ -1,53 +1,21 @@
 //Custom hook imports.
+import axiosInstance from "../../axiosInstance";
 import useCart from "../../hooks/useCart";
-
-//material ui icons.
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-
-const CartItem = ({ item, deleteCartItem }) => {
-    return (
-        <div id="cart-item" className="flex gap-2 items-center">
-            <div className="max-w-[5rem]">
-                <img
-                    src={`${import.meta.env.VITE_IMAGE_BASE_URL}${
-                        item.attributes.image1.data.attributes.url
-                    }`}
-                    alt="cart item image"
-                    className="w-full h-full object-cover"
-                />
-            </div>
-            <div id="item-details" className="grow">
-                <div className="font-bold text-md">{item.attributes.name}</div>
-                <div>{item.attributes.desc}</div>
-                <div className="flex justify-between">
-                    <div className="space-x-2 text-cyan-500">
-                        <span>1</span>
-                        <span>X</span>
-                        <span>{item.attributes.price}</span>
-                    </div>
-                    <div className="space-x-2">
-                        <span className="font-semibold">Total:</span>
-                        <span>{1 * item.attributes.price}</span>
-                    </div>
-                </div>
-            </div>
-            <div onClick={() => deleteCartItem(item.id)}>
-                <DeleteOutlineOutlinedIcon className="text-red-500 hover:cursor-pointer" />
-            </div>
-        </div>
-    );
-};
+import CartItem from "./components/CartItem";
 
 const Cart = () => {
     const { cartItems, setCartItems } = useCart();
     console.log("cart items", cartItems);
 
-    const deleteCartItem = itemId => {
-        const updatedCartItems = cartItems.filter(item => item.id !== itemId);
-        setCartItems(updatedCartItems);
+    const deleteCartItem = async itemId => {
+        try {
+            const response = await axiosInstance.delete(`/carts/${itemId}`);
+            alert("Item deleted!");
+        } catch (err) {
+            console.log(err);
+            console.log("Server error please try again!");
+        }
     };
-
-    let subTotal = 0;
 
     return (
         <div className="bg-white w-[40rem] space-y-4 p-4 absolute right-2 top-16 shadow-md rounded-md transition-all">
@@ -56,11 +24,10 @@ const Cart = () => {
                 <div className="text-xl">Your cart is empty</div>
             ) : (
                 cartItems.map(item => {
-                    subTotal = item.attributes.price + subTotal;
                     return (
                         <CartItem
                             deleteCartItem={deleteCartItem}
-                            key={item.id}
+                            key={item.attributes.products.data[0].id}
                             item={item}
                         />
                     );
@@ -72,7 +39,7 @@ const Cart = () => {
                         <span>SUB TOTAL:</span>
                         <div>
                             <span>&#8377;</span>
-                            <span>{subTotal}</span>
+                            <span>none</span>
                         </div>
                     </div>
                     <div>

@@ -8,6 +8,7 @@ const Home = () => {
     const { data, isLoading, error } = useFetch(
         "/products?filters[type][$eq]=featured&populate[image1]=image1&populate[image2]=image2"
     );
+
     console.log(data);
     return (
         <div className="flex flex-col gap-4">
