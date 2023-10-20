@@ -1,16 +1,19 @@
 //Custom hook imports.
-import axiosInstance from "../../axiosInstance";
+import axiosInstance from "../../utils/axiosInstance";
 import useCart from "../../hooks/useCart";
 import CartItem from "./components/CartItem";
 
 const Cart = () => {
     const { cartItems, setCartItems } = useCart();
-    console.log("cart items", cartItems);
 
     const deleteCartItem = async itemId => {
         try {
-            const response = await axiosInstance.delete(`/carts/${itemId}`);
+            await axiosInstance.delete(`/carts/${itemId}`);
+            const updatedCartItems = cartItems.filter(
+                cartItem => cartItem.id !== itemId
+            );
             alert("Item deleted!");
+            setCartItems(updatedCartItems);
         } catch (err) {
             console.log(err);
             console.log("Server error please try again!");

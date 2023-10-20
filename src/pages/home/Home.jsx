@@ -24,7 +24,6 @@ const Home = () => {
                 )
             )}
             <Grid />
-            {/* <FeaturedProducts type="Trending" products={products} /> */}
         </div>
     );
 };

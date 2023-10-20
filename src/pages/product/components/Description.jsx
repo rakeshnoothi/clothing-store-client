@@ -6,7 +6,8 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import useCart from "../../../hooks/useCart";
 import useProduct from "../../../hooks/useProduct";
 import useAuth from "../../../hooks/useAuth";
-import axiosInstance from "../../../axiosInstance";
+//util imports.
+import axiosInstance from "../../../utils/axiosInstance";
 
 const Description = () => {
     const { user } = useAuth();
@@ -16,62 +17,58 @@ const Description = () => {
 
     const addToCart = async product => {
         if (user) {
-            try {
-                const response = await axiosInstance.post(
-                    "/carts?populate[products][populate][image1]=image1",
-                    {
-                        data: {
-                            productId: product.id,
-                            totalProducts: 1,
-                            products: [product.id],
-                        },
-                    }
-                );
-                setCartItems([...cartItems, response.data.data]);
-                alert("product added to cart!");
-            } catch (err) {
-                // if the error meassage is "this attribute must be unique" that means the item is already in the cart and just update totalproducts + 1
-                if (
-                    err.response.data.error.message ===
-                    "This attribute must be unique"
-                ) {
-                    console.log("cartItems bro", cartItems);
-                    const duplicateProduct = cartItems.find(item => {
+            const existingCartProduct = cartItems.find(item => {
+                if (item.attributes.productId === product.id) {
+                    return item;
+                }
+            });
+            if (!existingCartProduct) {
+                try {
+                    const response = await axiosInstance.post(
+                        "/carts?populate[products][populate][image1]=image1",
+                        {
+                            data: {
+                                productId: product.id,
+                                totalProducts: 1,
+                                products: [product.id],
+                            },
+                        }
+                    );
+                    setCartItems([...cartItems, response.data.data]);
+                    alert("product added to cart!");
+                } catch (err) {
+                    console.log(err);
+                    alert("cannot add item to the cart right now!");
+                }
+            } else {
+                try {
+                    await axiosInstance.put(
+                        `/carts/${existingCartProduct.id}?populate[products][populate][image1]=image1`,
+                        {
+                            data: {
+                                totalProducts:
+                                    existingCartProduct.attributes
+                                        .totalProducts + 1,
+                            },
+                        }
+                    );
+                    const updatedCartItems = cartItems.map(item => {
                         if (item.attributes.productId === product.id) {
+                            item.attributes.totalProducts =
+                                item.attributes.totalProducts + 1;
                             return item;
                         }
+                        return item;
                     });
-                    try {
-                        await axiosInstance.put(
-                            `/carts/${duplicateProduct.id}?populate[products][populate][image1]=image1`,
-                            {
-                                data: {
-                                    totalProducts:
-                                        duplicateProduct.attributes
-                                            .totalProducts + 1,
-                                },
-                            }
-                        );
-                        const updatedCartItems = cartItems.map(item => {
-                            if (item.attributes.productId === product.id) {
-                                item.attributes.totalProducts =
-                                    item.attributes.totalProducts + 1;
-                                return item;
-                            }
-                            return item;
-                        });
-                        setCartItems(updatedCartItems);
-                        alert("product added to cart!");
-                    } catch (err) {
-                        console.log(err);
-                        alert(
-                            "sorry cannot add product to cart at this moment!"
-                        );
-                    }
+                    setCartItems(updatedCartItems);
+                    alert("product added to cart!");
+                } catch (err) {
+                    console.log(err);
+                    alert("sorry cannot add product to cart at this moment!");
                 }
             }
         } else {
-            alert("Please login to add to cart");
+            alert("Please login to add to cart!");
         }
     };
 
@@ -83,6 +80,7 @@ const Description = () => {
             return setQuantity(quantity - 1);
         }
     };
+
     return (
         <div
             id="about_description_wrapper"

@@ -12,7 +12,8 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Cart from "../../pages/cart/Cart";
 //custom hook imports.
 import useCart from "../../hooks/useCart";
-import axiosInstance from "../../axiosInstance";
+//util imports
+import axiosInstance from "../../utils/axiosInstance";
 
 const Navbar = () => {
     const [open, setopen] = useState(false);
